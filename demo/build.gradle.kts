@@ -25,13 +25,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-logging") // logging SLF4J
 	implementation("org.springframework.boot:spring-boot-starter-data-redis") // redis
 	implementation("org.springframework.boot:spring-boot-starter-cache") // redis
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
+	implementation("io.jsonwebtoken:jjwt:0.12.6")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("com.mysql:mysql-connector-j:9.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
