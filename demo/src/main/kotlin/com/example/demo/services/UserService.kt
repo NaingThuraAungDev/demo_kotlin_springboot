@@ -2,7 +2,9 @@ package com.example.demo.services
 
 import com.example.demo.domain.entities.UserEntity
 import com.example.demo.repositories.UserRepository
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
+import java.util.concurrent.CompletableFuture
 
 @Service
 class UserService(
@@ -12,7 +14,8 @@ class UserService(
         return userRepository.save(userEntity)
     }
 
-    fun getUser(): List<UserEntity> {
-        return userRepository.findAll()
+    @Async
+    fun getUser(): CompletableFuture<List<UserEntity>> {
+        return CompletableFuture.completedFuture(userRepository.findAll())
     }
 }

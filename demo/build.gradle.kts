@@ -25,7 +25,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-logging") // logging SLF4J
 	implementation("org.springframework.boot:spring-boot-starter-data-redis") // redis
 	implementation("org.springframework.boot:spring-boot-starter-cache") // redis
-	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-security") // auth
+	implementation("org.springframework.boot:spring-boot-starter-async") // async
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.flywaydb:flyway-core")

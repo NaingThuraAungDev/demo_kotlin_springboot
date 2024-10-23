@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import toUserDto
 import toUserEntity
 import java.util.UUID
+import java.util.concurrent.CompletableFuture
 
 @RestController
 @RequestMapping(path = ["/v1/user"])
@@ -23,15 +24,19 @@ class UserController(
     @PostMapping
     fun createUser(@RequestBody userDto: UserDto): ResponseEntity<UserDto> {
         userDto.id = UUID.randomUUID()
-        val encodedPassword =  encoder.encode(userDto.password)
+        val encodedPassword = encoder.encode(userDto.password)
         userDto.password = encodedPassword
         val user = userService.createUser(userDto.toUserEntity()).toUserDto()
         return ResponseEntity(user, HttpStatus.CREATED)
     }
 
     @GetMapping
-    fun userList(): ResponseEntity<List<UserDto>>{
-        val userList = userService.getUser().map { it.toUserDto() }
-        return ResponseEntity(userList,HttpStatus.OK)
+    fun userList(): ResponseEntity<CompletableFuture<List<UserDto>>> {
+        val userList = userService.getUser().thenApply { x ->
+            x.map {
+                it.toUserDto()
+            }
+        }
+        return ResponseEntity(userList, HttpStatus.OK)
     }
 }
