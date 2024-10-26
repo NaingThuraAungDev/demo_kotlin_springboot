@@ -1,25 +1,24 @@
 package com.example.demo.controllers
 
 import com.example.demo.domain.dto.UserDto
+import com.example.demo.services.AuthorService
 import com.example.demo.services.UserService
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import toUserDto
 import toUserEntity
-import java.util.UUID
+import java.util.*
 import java.util.concurrent.CompletableFuture
 
 @RestController
 @RequestMapping(path = ["/v1/user"])
 class UserController(
     private val userService: UserService,
-    private val encoder: PasswordEncoder
+    private val encoder: PasswordEncoder,
+    private  val logger: org.slf4j.Logger? = LoggerFactory.getLogger(AuthorService::class.java)
 ) {
     @PostMapping
     fun createUser(@RequestBody userDto: UserDto): ResponseEntity<UserDto> {
@@ -32,11 +31,11 @@ class UserController(
 
     @GetMapping
     fun userList(): ResponseEntity<CompletableFuture<List<UserDto>>> {
-        val userList = userService.getUser().thenApply { x ->
+        val userList = userService.getUserAsync().thenApply { x ->
             x.map {
                 it.toUserDto()
             }
         }
-        return ResponseEntity(userList, HttpStatus.OK)
+        return ResponseEntity(userList,HttpStatus.OK)
     }
 }

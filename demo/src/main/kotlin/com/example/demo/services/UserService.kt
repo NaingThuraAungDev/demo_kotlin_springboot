@@ -15,7 +15,12 @@ class UserService(
     }
 
     @Async
-    fun getUser(): CompletableFuture<List<UserEntity>> {
+    fun getUserAsync(): CompletableFuture<List<UserEntity>> {
         return CompletableFuture.completedFuture(userRepository.findAll())
     }
+
+    fun getUser(): List<UserEntity> {
+        return userRepository.findAll()
+    }
+
 }
