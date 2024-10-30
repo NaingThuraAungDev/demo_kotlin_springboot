@@ -28,3 +28,10 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     com.example.demo: INFO
+
+springdoc:
+  swagger-ui:
+    supportedSubmitMethods: []
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

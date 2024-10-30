@@ -31,6 +31,7 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
 	implementation("io.jsonwebtoken:jjwt:0.12.6")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("com.mysql:mysql-connector-j:9.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

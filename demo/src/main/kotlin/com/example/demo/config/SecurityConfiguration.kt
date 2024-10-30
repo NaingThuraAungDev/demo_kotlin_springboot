@@ -29,6 +29,12 @@ class SecurityConfiguration(
                 it
                     .requestMatchers("/v1/auth", "v1/auth/refresh")
                     .permitAll()
+                    // swagger
+                    .requestMatchers("/").permitAll()
+                    .requestMatchers("/v3/api-docs/**").permitAll()
+                    .requestMatchers("/swagger-ui.html").permitAll()
+                    .requestMatchers("/swagger-ui/**").permitAll()
+
                     .requestMatchers(HttpMethod.POST, "/v1/user")
                     .permitAll()
                     .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll()
